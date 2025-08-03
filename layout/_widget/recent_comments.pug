@@ -9,4 +9,10 @@ if theme.waline.enable == true
     .widget-title
       i.fa.fa-comment-o= ' ' + __('recent_comments')
     #widget-waline-list
-    script(type='text/javascript', id="recent-comment", serverURL=theme.waline.serverURL, count=theme.waline.count ,  src=url_for(theme.js) + '/recent-comments.js' + '?v=' + theme.version, async)
+    script(type='module').
+      import { RecentComments } from 'https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.mjs';
+      RecentComments({
+        el: '#widget-waline-list',
+        serverURL: '#{theme.waline.serverURL}',
+        count: 5,
+      });
